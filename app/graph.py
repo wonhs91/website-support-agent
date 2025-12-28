@@ -3,6 +3,7 @@ from __future__ import annotations
 from langgraph.graph import END, START, StateGraph
 
 from app.nodes.lead_capture import lead_capture_node
+from app.nodes.off_topic import off_topic_node
 from app.nodes.qa import qa_node
 from app.nodes.router import route
 from app.state import ChatState
@@ -13,6 +14,7 @@ def build_graph() -> StateGraph:
 
     graph.add_node("qa", qa_node)
     graph.add_node("lead_capture", lead_capture_node)
+    graph.add_node("off_topic", off_topic_node)
 
     graph.add_conditional_edges(
         START,
@@ -20,11 +22,13 @@ def build_graph() -> StateGraph:
         {
             "qa": "qa",
             "lead_capture": "lead_capture",
+            "off_topic": "off_topic",
         },
     )
 
     graph.add_edge("qa", END)
     graph.add_edge("lead_capture", END)
+    graph.add_edge("off_topic", END)
 
     return graph
 
