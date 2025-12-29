@@ -18,6 +18,7 @@ async def send_lead_to_discord(lead: Mapping[str, str]) -> bool:
         "**New webchat lead**",
         f"**Name:** {lead.get('name', '')}",
         f"**Email:** {lead.get('email', '')}",
+        f"**Phone:** {lead.get('phone', '')}",
         f"**Company:** {lead.get('company', '')}",
         f"**Message:** {lead.get('message', '')}",
         f"**Source:** {lead.get('source', '')}",
